@@ -14,7 +14,7 @@ from utils.utils import _read_csv_,_darw
 # print(boston.feature_names)
 # x=boston.data
 # y=boston.target
-path = 'data/train.csv'
+path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/train.csv'
 df=pd.read_csv(path,encoding='GBK')
 print(df.head)
 '''use dropna(axis=0,how='all')'''
