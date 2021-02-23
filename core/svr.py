@@ -26,7 +26,7 @@ def _SVR(v, x, b):
     :param b:
     :return:
     '''
-    path = '/Users/kanghaidong/Desktop/market_data/pinganyinhang.csv'
+    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/stock_pinganyinhang.csv'
     x_train, x_test, y_train, y_test=_read_csv_(path)
 
     c = x[0]

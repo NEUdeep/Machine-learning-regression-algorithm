@@ -5,7 +5,7 @@ import pandas as pd
 
 
 import time
-path = '//data/stock_pinganyinhang.csv'
+path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/stock_pinganyinhang.csv'
 df=pd.read_csv(path,encoding='GBK')
 y = df[['closePrice']].values
 df = df.dropna(axis=0,how='all')
@@ -29,5 +29,6 @@ plt.xlabel('data')
 plt.ylabel('target')
 plt.title('SVR')
 plt.legend()
+# plt.savefig('result_rbf_model')
 plt.show()
 
