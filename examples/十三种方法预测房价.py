@@ -28,7 +28,7 @@ mpl.rcParams['font.sans-serif'] = ['SimHei']
 from matplotlib import rcParams
 rcParams['axes.unicode_minus']=False
 
-data=pd.read_csv('/Users/kanghaidong/Downloads/train.csv')
+data=pd.read_csv('/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/stock_pinganyinhang.csv')
 
 
 data['MSSubClass']=data['MSSubClass'].astype(str)  #MSSubClass是一个分类变量，所以要把他的数据类型改为‘’str‘’

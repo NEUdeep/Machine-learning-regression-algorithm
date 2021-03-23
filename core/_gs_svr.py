@@ -42,6 +42,10 @@ def _gs_svr(path):
     svr.fit(x_train, y_train)
     # 预测结果
     svr_predict = svr.predict(x_test)
+
+    #predict
+    print(f'predict values is: {svr_predict[-6:-1]}')
+    print(f'real values is: {y_test[-6:-1]}')
     score = svr.score(x_test, y_test)
     # 模型评测
     mae = mean_absolute_error(y_test, svr_predict)

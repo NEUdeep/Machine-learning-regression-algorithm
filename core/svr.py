@@ -35,6 +35,9 @@ def _SVR(v, x, b):
     _SVR = svm.SVR(C=c, epsilon=e, gamma=g, kernel='rbf')
     _SVR.fit(x_train, y_train)
     y_pred = _SVR.predict(x_test) # np.array
+
+    print(f'predict values is: {y_pred[-1]}')
+    print(f'real values is: {y_test[-1]}')
     # print("y_pred is", y_pred , "y_true is" , y_test)
     # print(len(y_pred),len(y_test))
     # 返回svm的mse作为适应度值
