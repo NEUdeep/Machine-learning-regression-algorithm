@@ -26,7 +26,7 @@ def _SVR(v, x, b):
     :param b:
     :return:
     '''
-    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/stock_pinganyinhang.csv'
+    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/hangkongshuju.csv'
     x_train, x_test, y_train, y_test=_read_csv_(path)
 
     c = x[0]
@@ -34,16 +34,19 @@ def _SVR(v, x, b):
     g = x[2]
     _SVR = svm.SVR(C=c, epsilon=e, gamma=g, kernel='rbf')
     _SVR.fit(x_train, y_train)
-    y_pred = _SVR.predict(x_test) # np.array
+    y_pred = _SVR.predict(x_train) # np.array
+    pridict = _SVR.predict(x_test)
 
-    print(f'predict values is: {y_pred[-1]}')
-    print(f'real values is: {y_test[-1]}')
+    # 打印未来预测值
+    print(f'predict futrue: {pridict}')
+
+    # print(f'real values is: {y_test[-1]}')
     # print("y_pred is", y_pred , "y_true is" , y_test)
     # print(len(y_pred),len(y_test))
     # 返回svm的mse作为适应度值
     # y_test = y_test.values # Pandas中把dataframe和np.array的相互转换
-    score = _SVR.score(x_test, y_test)
+    score = _SVR.score(x_train, y_train)
     print(f"score{score}")
-    _darw(y_test, y_pred, 'y_test', 'pridict', 'r', 'days', 'close_price', 'stock_price')
+    _darw(y_train, y_pred, 'y_test', 'pridict', 'r', 'days', 'close_price', 'stock_price')
 
-    return _MSE(y_pred, y_test),y_pred, y_test
+    return _MSE(y_pred, y_train),y_pred, y_train

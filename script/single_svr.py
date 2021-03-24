@@ -14,17 +14,19 @@ from utils.utils import _read_csv_,_darw
 # print(boston.feature_names)
 # x=boston.data
 # y=boston.target
-path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/train.csv'
-df=pd.read_csv(path,encoding='GBK')
+path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/hangkongshuju.csv'
+df=pd.read_csv(path,encoding='utf-8') # GBK
 print(df.head)
 '''use dropna(axis=0,how='all')'''
 df = df.dropna(axis=0,how='all')
 
-x=df[['GDP','工业总产值','铁路运输长度','复线比例','公路运输长度','等级公路比重','铁路货运数量','民用载货车辆']]
-y=df[['货运量']]
+# x=df[['GDP','工业总产值','铁路运输长度','复线比例','公路运输长度','等级公路比重','铁路货运数量','民用载货车辆']]
+# y=df[['货运量']]
+x = df[['x1','x2','x3','x4','x5','x6','x7']]
+y = df[['y3']]
 # 拆分数据集
 # x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.7,random_state=10)
-x_train,x_test,y_train,y_test = x[:-1],x[9:],y[:-1],y[9:]
+x_train,x_test,y_train,y_test = x[:-7],x[10:],y[:-7],y[10:]
 # 预处理
 y_train = np.array(y_train).reshape(-1, 1)
 y_test = np.array(y_test).reshape(-1, 1)
@@ -42,7 +44,7 @@ score = svr.score(x_train,y_train)
 pridict = svr.predict(x_test)
 
 #打印未来预测值
-print(f'predict:{pridict}')
+print(f'predict futrue: {pridict}')
 
 #评价结果
 mae = mean_absolute_error(y_train, svr_predict)
@@ -56,7 +58,7 @@ print("R2：", r2)
 print("score",score)
 
 # 绘图
-_darw(y_train+1,svr_predict,'y_test','pridict','g','days','house_price','house_price')
+_darw(y_train+1,svr_predict,'y_test','pridict','r','days','house_price','house_price')
 
 
 

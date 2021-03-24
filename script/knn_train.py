@@ -3,7 +3,7 @@ from core.bp.bp_alg import _knn_bp
 
 
 if __name__ == "__main__":
-    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/train.csv'
+    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/hangkongshuju.csv'
     save = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/result/'
     network_out,sample_out = _knn_bp(path,save)
 

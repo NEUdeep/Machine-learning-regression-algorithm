@@ -9,7 +9,7 @@ if __name__ == "__main__":
     假设你要预测3个因变量，和多个相同的自变量的关系，请一个一个因变量带入预测。
     如有疑问,如具体如何替换因变量，请call khd.
     '''
-    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/stock_pinganyinhang.csv'
+    path = '/Users/kanghaidong/Desktop/haidong/github-reper/Machine-learning-regression-algorithm/data/hangkongshuju.csv'
     score,mae,mse,evs,r2 = _gs_svr(path)
     print("MAE：", mae)
     print("MSE：", mse)

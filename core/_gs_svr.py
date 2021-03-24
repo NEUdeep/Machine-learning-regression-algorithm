@@ -41,18 +41,23 @@ def _gs_svr(path):
     # 获取在训练集的模型
     svr.fit(x_train, y_train)
     # 预测结果
-    svr_predict = svr.predict(x_test)
+    svr_predict = svr.predict(x_train)
+
+    pridict = svr.predict(x_test)
+
+    # 打印未来预测值
+    print(f'predict future: {pridict}')
 
     #predict
-    print(f'predict values is: {svr_predict[-6:-1]}')
+    print(f'predict exit values is: {svr_predict[-6:-1]}')
     print(f'real values is: {y_test[-6:-1]}')
-    score = svr.score(x_test, y_test)
+    score = svr.score(x_train, y_train)
     # 模型评测
-    mae = mean_absolute_error(y_test, svr_predict)
-    mse = mean_squared_error(y_test, svr_predict)
-    evs = explained_variance_score(y_test, svr_predict)
-    r2 = r2_score(y_test, svr_predict)
+    mae = mean_absolute_error(y_train, svr_predict)
+    mse = mean_squared_error(y_train, svr_predict)
+    evs = explained_variance_score(y_train, svr_predict)
+    r2 = r2_score(y_train, svr_predict)
 
     # draw
-    _darw(y_test, svr_predict, 'y_test', 'pridict', 'r', 'days', 'close_price', 'stock_price')
+    _darw(y_train, svr_predict, 'y_test', 'pridict', 'r', 'days', 'close_price', 'stock_price')
     return score,mae,mse,evs,r2
