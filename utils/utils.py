@@ -19,14 +19,18 @@ def _darw(y,pridict,origin_label,pridict_label,colour,xlabel,ylabel,title):
     '''
     x = [k for k in range(len(y))]
     x = np.sort(x,axis=0)
-    # print(len(y),x)
+    print(len(y),x)
+    # x = [2010,2011,2012,2013,2014,2015,2016,2017,2018]
+
+    # y = list(y)
+    # y = np.sum([y,x],axis=0)
     plt.scatter(x,y,c='k',label=origin_label)
     plt.plot(pridict,c=colour,label=pridict_label)
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
     plt.legend()
-    # plt.savefig('result')
+    plt.savefig('result')
     '''
     注意，当调用ga_svr的时候，上面一行不要打开，当前代码逻辑是每次ga搜索都会保存图片。
     '''
@@ -75,7 +79,7 @@ def _read_csv_(path):
     # print(boston_data)
     df = pd.read_csv(path, encoding='utf8')
     # y = df[['单位GDP通航飞行时间']].values
-    y = df[['y2']].values
+    y = df[['y3']].values
     df = df.dropna(axis=0, how='all')
     #df = df.set_index('居民消费水平').copy()
     #X = np.mat(range(1, len(df.values) + 1)).T

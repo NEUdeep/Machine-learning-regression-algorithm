@@ -47,6 +47,6 @@ def _SVR(v, x, b):
     # y_test = y_test.values # Pandas中把dataframe和np.array的相互转换
     score = _SVR.score(x_train, y_train)
     print(f"score{score}")
-    _darw(y_train, y_pred, 'y_test', 'pridict', 'r', 'days', 'close_price', 'stock_price')
+    _darw(y_train, y_pred, 'y_test', 'pridict', 'r', 'years', 'Industrial aviation unit GDP flight hours', 'Industrial aviation unit GDP flight hours')
 
     return _MSE(y_pred, y_train),y_pred, y_train

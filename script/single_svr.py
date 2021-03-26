@@ -58,7 +58,7 @@ print("R2：", r2)
 print("score",score)
 
 # 绘图
-_darw(y_train+1,svr_predict,'y_test','pridict','r','days','house_price','house_price')
+_darw(y_train,svr_predict,'y_test','pridict','r','years','Flight hours per unit GDP','Flight hours per unit GDP')
 
 
 
