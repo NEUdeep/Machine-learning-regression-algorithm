@@ -23,17 +23,26 @@ df = df.dropna(axis=0,how='all')
 # x=df[['GDP','工业总产值','铁路运输长度','复线比例','公路运输长度','等级公路比重','铁路货运数量','民用载货车辆']]
 # y=df[['货运量']]
 x = df[['x1','x2','x3','x4','x5','x6','x7']]
-y = df[['y3']]
+y = df[['y1']]
 # 拆分数据集
 # x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.7,random_state=10)
-x_train,x_test,y_train,y_test = x[:-7],x[10:],y[:-7],y[10:]
+x_train,x_test,y_train,y_test = x[:-7],x[9:],y[:-7],y[9:]
 # 预处理
 y_train = np.array(y_train).reshape(-1, 1)
 y_test = np.array(y_test).reshape(-1, 1)
-x_train = StandardScaler().fit_transform(x_train)
-x_test = StandardScaler().fit_transform(x_test)
-y_train = StandardScaler().fit_transform(y_train).ravel()
-y_test = StandardScaler().fit_transform(y_test).ravel()
+# x_train = StandardScaler().fit_transform(x_train) # 先拟合、再标准化
+scaler1 = StandardScaler().fit(x_train)
+x_train = scaler1.transform(x_train)
+# x_train = StandardScaler().fit(x_train) # 拟合
+# x_test = StandardScaler().fit_transform(x_test)
+
+scaler2 = StandardScaler().fit(x_test)
+x_test = scaler2.transform(x_test)
+# x_test = StandardScaler().transform(x_test) # 只标准化、不拟合
+# y_train = StandardScaler().fit_transform(y_train).ravel()
+scaler3 = StandardScaler().fit(y_train)
+y_train = scaler3.transform(y_train)
+# y_test = StandardScaler().fit_transform(y_test).ravel()
 
 #创建svR实例
 svr=SVR(C=1, kernel='rbf', epsilon=0.2)
@@ -42,6 +51,21 @@ svr=svr.fit(x_train,y_train)
 svr_predict=svr.predict(x_train)
 score = svr.score(x_train,y_train)
 pridict = svr.predict(x_test)
+
+# 为了反标转化，需要将数据扩展为2维numpy
+# numpy.array(a).reshape(len(a),1)  # reshape(列的长度，行的长度)
+
+svr_predict = np.array(svr_predict).reshape(len(svr_predict),1)
+pridict = np.array(pridict).reshape(len(pridict),1)
+
+# 使用sklearn进行数据的归一化和归一化还原
+# # invers_tainsform()
+# pridict = StandardScaler().fit(pridict.reshape(-1, 1)).inverse_transform(pridict.reshape(-1, 1))
+# y_train = StandardScaler().fit(y_train.reshape(-1, 1)).inverse_transform(y_train.reshape(-1, 1))
+# svr_predict = StandardScaler().fit(svr_predict.reshape(-1, 1)).inverse_transform(svr_predict.reshape(-1, 1))
+y_train = scaler3.inverse_transform(y_train)
+svr_predict = scaler3.inverse_transform(svr_predict)
+pridict = scaler3.inverse_transform(pridict)
 
 #打印未来预测值
 print(f'predict futrue: {pridict}')

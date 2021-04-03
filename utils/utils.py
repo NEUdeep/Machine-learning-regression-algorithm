@@ -95,15 +95,24 @@ def _read_csv_(path):
     # y = boston_data.target
     # x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=10)
     # x_train, x_test, y_train, y_test = X,X,y,y
-    x_train, x_test, y_train, y_test = X[:-7], X[10:], y[:-7], y[10:]
+    x_train, x_test, y_train, y_test = X[:-7], X[9:], y[:-7], y[9:]
     # 预处理
     y_train = np.array(y_train).reshape(-1, 1)
     y_test = np.array(y_test).reshape(-1, 1)
-    x_train = StandardScaler().fit_transform(x_train)
-    x_test = StandardScaler().fit_transform(x_test)
-    y_train = StandardScaler().fit_transform(y_train).ravel()
-    y_test = StandardScaler().fit_transform(y_test).ravel()
-    return x_train, x_test, y_train, y_test
+    # x_train = StandardScaler().fit_transform(x_train) # 先拟合、再标准化
+    scaler1 = StandardScaler().fit(x_train)
+    x_train = scaler1.transform(x_train)
+    # x_train = StandardScaler().fit(x_train) # 拟合
+    # x_test = StandardScaler().fit_transform(x_test)
+
+    scaler2 = StandardScaler().fit(x_test)
+    x_test = scaler2.transform(x_test)
+    # x_test = StandardScaler().transform(x_test) # 只标准化、不拟合
+    # y_train = StandardScaler().fit_transform(y_train).ravel()
+    scaler3 = StandardScaler().fit(y_train)
+    y_train = scaler3.transform(y_train)
+    # y_test = StandardScaler().fit_transform(y_test).ravel()
+    return x_train, x_test, y_train, y_test, scaler3
 
 
 def _read_csv_huoyun(path):

@@ -9,7 +9,7 @@ def _gs_svr(path):
     :param path:
     :return:
     '''
-    x_train, x_test, y_train, y_test = _read_csv_(path)
+    x_train, x_test, y_train, y_test, scalar = _read_csv_(path)
 
     # 设置超参数
     C = [0.1, 0.2, 0.5, 0.8, 0.9, 1, 2, 5, 10]
